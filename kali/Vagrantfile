@@ -21,6 +21,8 @@ Vagrant.configure("2") do |config|
   # Provision dengan shell script
   config.vm.provision "shell", inline: <<-EOF
     sudo apt update
-    sudo apt install -y crowbar
+    sudo apt install -y crowbar curl
+    # curl -s https://raw.githubusercontent.com/ariafatah0711/vm/refs/heads/main/scripts/setup.sh | bash -s install
+    # sudo -u vagrant bash -c "curl -s https://raw.githubusercontent.com/ariafatah0711/vm/refs/heads/main/scripts/setup.sh | bash -s install"
   EOF
 end

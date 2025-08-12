@@ -15,4 +15,7 @@ vagrant up
 vagrant init ubuntu/trusty64 --box-version 20191107.0.0
 
 vagrant up
+vagrant up --provision # up with provision
+
+vagrant provision # provision if vm alredy run
 ```
