@@ -9,7 +9,7 @@ Vagrant.configure("2") do |config|
   config.vm.network "public_network"
 
   # config.vm.synced_folder "../data", "/home/vagrant/data", owner: "vagrant", group: "vagrant"
-  config.vm.synced_folder "E:/4_bootcamp/idn_bootcamp/final_task/tema7", "/home/vagrant/data", owner: "vagrant", group: "vagrant"
+  config.vm.synced_folder "E:/4_bootcamp/idn_bootcamp/final_task", "/home/vagrant/data", owner: "vagrant", group: "vagrant"
 
   config.vm.provider "virtualbox" do |vb|
     vb.gui = true
