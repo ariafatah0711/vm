@@ -10,6 +10,7 @@ Vagrant.configure("2") do |config|
 
   # config.vm.synced_folder "../data", "/home/vagrant/data", owner: "vagrant", group: "vagrant"
   config.vm.synced_folder "E:/4_bootcamp/idn_bootcamp/final_task", "/home/vagrant/data", owner: "vagrant", group: "vagrant"
+  config.vm.synced_folder "E:/_test/", "/home/vagrant/_test", owner: "vagrant", group: "vagrant"
 
   config.vm.provider "virtualbox" do |vb|
     vb.gui = false
