@@ -13,6 +13,7 @@ Vagrant.configure("2") do |config|
   config.vm.synced_folder "E:/_test/", "/home/vagrant/_test", owner: "vagrant", group: "vagrant"
 
   config.vm.provider "virtualbox" do |vb|
+    vb.name = "ubuntu"
     vb.gui = false
     vb.memory = "3100"
     vb.cpus = 3

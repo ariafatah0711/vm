@@ -10,6 +10,8 @@ Vagrant.configure("2") do |config|
 
   # VirtualBox specific settings
   config.vm.provider "virtualbox" do |vb|
+    vb.name = "kali_linux"
+
     # Tampilkan GUI saat boot
     vb.gui = true
 
