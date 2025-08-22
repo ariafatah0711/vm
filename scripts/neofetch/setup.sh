@@ -8,11 +8,11 @@ SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 # Remote URLs
 REMOTE_CONFIG_URL="https://raw.githubusercontent.com/ariafatah0711/vm/main/scripts/neofetch/config.conf"
-REMOTE_LOGO_URL="https://raw.githubusercontent.com/ariafatah0711/vm/main/scripts/neofetch/logo/3.txt"
+REMOTE_LOGO_URL="https://raw.githubusercontent.com/ariafatah0711/vm/main/scripts/neofetch/logo/3_color.txt"
 
 # Local files
 LOCAL_CONFIG="${SCRIPT_DIR}/config.conf"
-LOCAL_LOGO="${SCRIPT_DIR}/logo/3.txt"
+LOCAL_LOGO="${SCRIPT_DIR}/logo/3_color.txt"
 
 # Colors
 GREEN="\033[32m"
