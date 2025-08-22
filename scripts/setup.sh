@@ -49,6 +49,7 @@ update_shell_rc() {
     {
       echo ""
       echo "# Inisiasi Oh My Posh dengan tema avit.omp-aria"
+      echo "clear"
       echo "eval \"\$(oh-my-posh --init --shell ${SHELL_NAME} --config ${THEME_FILE})\""
     } >> "${SHELL_RC}"
     echo -e "${GREEN}✅ Baris inisialisasi ditambahkan ke ${SHELL_RC}.${RESET}"
