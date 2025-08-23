@@ -66,3 +66,11 @@ vagrant plugin install <p>  # install plugin
 vagrant ssh-config          # lihat konfigurasi SSH untuk VM ini
 vagrant version             # cek versi Vagrant
 ```
+
+### snapshoot
+```bash
+vagrant snapshot save namasnapshot # Buat snapshot
+vagrant snapshot list # Lihat daftar snapshot
+vagrant snapshot restore namasnapshot # Restore snapshot
+vagrant snapshot delete namasnapshot # Hapus snapshot
+```

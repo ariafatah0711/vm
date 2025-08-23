@@ -9,6 +9,7 @@ Vagrant.configure("2") do |config|
   config.vm.network "public_network"
 
   config.vm.synced_folder "E:/_test", "/home/vagrant/data", owner: "vagrant", group: "vagrant"
+  config.vm.synced_folder "../data", "/home/vagrant/linux", owner: "vagrant", group: "vagrant"
 
   config.vm.provider "virtualbox" do |vb|
     vb.name = "ubuntu_test"
