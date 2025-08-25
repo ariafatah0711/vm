@@ -26,3 +26,5 @@ Thumbs.db
 .vagrant
 
 vagrant/**/data
+
+data
