@@ -6,8 +6,10 @@ Vagrant.configure("2") do |config|
 
   # Gunakan bridged network (akan minta pilih adapter fisik saat vagrant up)
   config.vm.network "public_network"
-  config.vm.synced_folder "./data", "/home/vagrant/linux", owner: "vagrant", group: "vagrant"
+  # config.vm.synced_folder "./data", "/home/vagrant/linux", owner: "vagrant", group: "vagrant"
   config.vm.synced_folder "E:/8_security/ctf_aria", "/home/vagrant/ctf_aria", owner: "vagrant", group: "vagrant"
+  config.vm.synced_folder "E:/8_security/btr", "/home/vagrant/data", owner: "vagrant", group: "vagrant"
+  # config.vm.synced_folder "E:/8_security/htr_aria", "/home/vagrant/htr_aria", owner: "vagrant", group: "vagrant"
 
   # VirtualBox specific settings
   config.vm.provider "virtualbox" do |vb|
@@ -17,8 +19,13 @@ Vagrant.configure("2") do |config|
     vb.gui = true
 
     # RAM VM
-    vb.memory = "4096"
-    vb.cpus = 2
+    vb.memory = "5050"
+    vb.cpus = 6
+
+     vb.customize ["modifyvm", :id, "--draganddrop", "disabled"]
+
+    # 🔴 Disable NAT adapter bawaan (nic1)
+    # vb.customize ["modifyvm", :id, "--nic1", "none"]
   end
 
   # Provision dengan shell script

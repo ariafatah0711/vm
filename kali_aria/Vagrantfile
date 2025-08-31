@@ -1,0 +1,97 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+Vagrant.configure("2") do |config|
+  config.vm.box = "kalilinux/rolling"
+
+  # Gunakan bridged network (akan minta pilih adapter fisik saat vagrant up)
+  config.vm.network "public_network"
+  config.vm.synced_folder "E:/8_security/ctf_aria", "/home/vagrant/ctf_aria", owner: "vagrant", group: "vagrant"
+  config.vm.synced_folder "E:/8_security/btr", "/home/vagrant/data", owner: "vagrant", group: "vagrant"
+
+  # VirtualBox specific settings
+  config.vm.provider "virtualbox" do |vb|
+    vb.name = "kali_linux_test"
+
+    # Tampilkan GUI saat boot
+    vb.gui = true
+
+    # RAM VM
+    vb.memory = "5080"
+    vb.cpus = 4
+
+    vb.customize ["modifyvm", :id, "--draganddrop", "disabled"]
+    # vb.customize ["modifyvm", :id, "--nic1", "none"]
+    vb.customize ["modifyvm", :id, "--accelerate3d", "on"] # aktifkan 3D accel
+  end
+
+  config.vm.provision "shell", privileged: false, inline: <<-EOF
+    # === Update & base dependencies ===
+    sudo apt update && sudo apt install -y build-essential libssl-dev zlib1g-dev \
+      libbz2-dev libreadline-dev libsqlite3-dev curl git \
+      libncurses5-dev libncursesw5-dev xz-utils tk-dev libffi-dev liblzma-dev
+
+    # === Install pyenv ===
+    if [ ! -d "$HOME/.pyenv" ]; then
+      curl https://pyenv.run | bash
+    fi
+
+    export PYENV_ROOT="$HOME/.pyenv"
+    export PATH="$PYENV_ROOT/bin:$PATH"
+    eval "$(pyenv init -)"
+    eval "$(pyenv virtualenv-init -)"
+
+    # Python setup
+    pyenv install -s 3.10.13
+    pyenv global 3.10.13
+
+    pip install --upgrade pip setuptools wheel
+
+    # === Tools ===
+    mkdir -p ~/tools ~/bin
+    if [ ! -d ~/tools/dirsearch ]; then
+      git clone https://github.com/maurosoria/dirsearch.git ~/tools/dirsearch
+    fi
+    cd ~/tools/dirsearch && pip install -r requirements.txt
+    ln -sf ~/tools/dirsearch/dirsearch.py ~/bin/dirsearch
+
+    # Python tools
+    pip install -U pwncat-cs
+    pip install -U dirsearch
+    # pip install -U wfuzz
+
+    # === Aliases ===
+    if ! grep -q "alias burp-browser=" ~/.zshrc; then
+      echo "alias burp-browser='chromium --proxy-server=\"http://127.0.0.1:8080\" --ignore-certificate-errors'" >> ~/.zshrc
+    fi
+
+    if ! grep -q 'pyenv init' ~/.zshrc; then
+      cat >> ~/.zshrc <<'EOL'
+# === Pyenv setup ===
+export PYENV_ROOT="$HOME/.pyenv"
+export PATH="\$PYENV_ROOT/bin:$PATH"
+
+if command -v pyenv >/dev/null 2>&1; then
+  eval "$(pyenv init -)"
+  eval "$(pyenv virtualenv-init -)"
+fi
+EOL
+    fi
+
+    if ! grep -q 'pyenv init' ~/.profile; then
+      cat >> ~/.profile <<'EOL'
+# === Pyenv setup ===
+export PYENV_ROOT="$HOME/.pyenv"
+export PATH="\$PYENV_ROOT/bin:$PATH"
+eval "$(pyenv init -)"
+eval "$(pyenv virtualenv-init -)"
+EOL
+    fi
+  EOF
+end
+
+# ; setelahlogin jalankan ini
+# echo 'export PYENV_ROOT="$HOME/.pyenv"' >> ~/.profile
+# echo 'export PATH="\$PYENV_ROOT/bin:$PATH"' >> ~/.profile
+# echo 'eval "$(pyenv init - bash)"' >> ~/.profile
+# echo 'eval "$(pyenv virtualenv-init -)"' >> ~/.profile
