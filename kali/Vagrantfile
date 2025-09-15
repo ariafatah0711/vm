@@ -11,6 +11,8 @@ Vagrant.configure("2") do |config|
   config.vm.synced_folder "E:/8_security/btr", "/home/vagrant/data", owner: "vagrant", group: "vagrant"
   # config.vm.synced_folder "E:/8_security/htr_aria", "/home/vagrant/htr_aria", owner: "vagrant", group: "vagrant"
 
+  config.vm.synced_folder "E:/5_web", "/home/vagrant/web", owner: "vagrant", group: "vagrant"
+
   # VirtualBox specific settings
   config.vm.provider "virtualbox" do |vb|
     vb.name = "kali_linux"
