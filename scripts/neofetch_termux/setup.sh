@@ -3,7 +3,7 @@
 set -euo pipefail
 
 # ====== CONFIG ======
-NEOFETCH_CONFIG_DIR="${HOME}/.config/neofetch_termux"
+NEOFETCH_CONFIG_DIR="${HOME}/.config/neofetch"
 SCRIPT_DIR="$(dirname "$(realpath "${BASH_SOURCE[0]:-${0}}")" 2>/dev/null || echo "$(pwd)")"
 
 # Remote URLs
