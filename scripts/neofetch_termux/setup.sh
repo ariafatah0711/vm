@@ -3,16 +3,16 @@
 set -euo pipefail
 
 # ====== CONFIG ======
-NEOFETCH_CONFIG_DIR="${HOME}/.config/neofetch"
-SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+NEOFETCH_CONFIG_DIR="${HOME}/.config/neofetch_termux"
+SCRIPT_DIR="$(dirname "$(realpath "${BASH_SOURCE[0]:-${0}}")" 2>/dev/null || echo "$(pwd)")"
 
 # Remote URLs
-REMOTE_CONFIG_URL="https://raw.githubusercontent.com/ariafatah0711/vm/main/scripts/neofetch/config.conf"
-REMOTE_LOGO_URL="https://raw.githubusercontent.com/ariafatah0711/vm/main/scripts/neofetch/logo/3_color.txt"
+REMOTE_CONFIG_URL="https://raw.githubusercontent.com/ariafatah0711/vm/main/scripts/neofetch_termux/config.conf"
+REMOTE_LOGO_URL="https://raw.githubusercontent.com/ariafatah0711/vm/main/scripts/neofetch/logo/2_color.txt"
 
 # Local files
 LOCAL_CONFIG="${SCRIPT_DIR}/config.conf"
-LOCAL_LOGO="${SCRIPT_DIR}/logo/3_color.txt"
+LOCAL_LOGO="${SCRIPT_DIR}/logo/2_color.txt"
 
 # Colors
 GREEN="\033[32m"

@@ -45,10 +45,3 @@ neofetch
 4. Config is set to use the custom logo automatically
 
 Now just run `neofetch` and it will show your custom ASCII art! 🎉
-
----
-
-# termux
-```bash
-curl -s https://raw.githubusercontent.com/ariafatah0711/vm/refs/heads/main/scripts/neofetch/termux.sh | bash -s install
-```
