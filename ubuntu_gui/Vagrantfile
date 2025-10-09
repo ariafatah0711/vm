@@ -1,0 +1,41 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+Vagrant.configure("2") do |config|
+  config.vm.box = "ubuntu/focal64"
+  config.vm.hostname = "ubuntu-aria"
+  config.vm.network "public_network"
+
+  config.vm.provider "virtualbox" do |vb|
+    vb.name = "ubuntu_gui"
+    vb.gui = true
+
+    vb.memory = "3050"
+    vb.cpus = 3
+  end
+
+  config.vm.provision "shell", inline: <<-SHELL
+    sudo apt-get update
+
+    # Install desktop minimal + guest additions
+    sudo apt install -y --no-install-recommends \
+      ubuntu-desktop \
+      virtualbox-guest-dkms \
+      virtualbox-guest-utils \
+      virtualbox-guest-x11
+
+    # Fonts + locale biar terminal ga kotak2
+    sudo apt install -y fonts-noto fonts-noto-cjk fonts-ubuntu-console
+    # sudo apt install -y language-pack-en language-pack-id
+    # sudo update-locale LANG=en_US.UTF-8
+
+    # Tools tambahan
+    sudo apt install -y curl git vim
+
+    curl -s https://raw.githubusercontent.com/ariafatah0711/vm/refs/heads/main/scripts/setup.sh | bash -s install
+    sudo -u vagrant bash -c "curl -s https://raw.githubusercontent.com/ariafatah0711/vm/refs/heads/main/scripts/setup.sh | bash -s install"
+
+    # Restart
+    sudo shutdown -r now
+  SHELL
+end
