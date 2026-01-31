@@ -1,0 +1,26 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+Vagrant.configure("2") do |config|
+  config.vm.box = "t-mtsmt/REMnux"
+
+  config.vm.hostname = "remnux"
+
+  config.vm.synced_folder "E:/8_security/ctf_aria", "/home/vagrant/ctf_aria", owner: "vagrant", group: "vagrant"
+
+  config.vm.provider "virtualbox" do |v|
+    v.memory = 4096
+    v.cpus = 2
+    v.gui = true
+  end
+
+  config.vm.provider "vmware_desktop" do |v|
+    v.name = "remnux"
+
+    v.allowlist_verified = true
+    v.memory = 4096
+    v.cpus = 2
+    v.gui = true
+  end
+
+end
