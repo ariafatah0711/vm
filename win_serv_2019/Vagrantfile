@@ -1,0 +1,21 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+Vagrant.configure("2") do |config|
+  config.vm.box = "StefanScherer/windows_2019"
+  config.vm.box_version = "2021.05.15"
+  config.vm.hostname = "JKT-DC01"
+
+  config.vm.network "public_network"
+
+  config.vm.synced_folder "data", "/data", owner: "vagrant", group: "vagrant"
+
+  config.vm.provider "virtualbox" do |vb|
+    # Display the VirtualBox GUI when booting the machine
+    vb.name = "WinServ2019_DC"
+    vb.gui = true
+
+    # Customize the amount of memory on the VM:
+    vb.memory = "4096"
+  end
+end

@@ -1,1 +1,0 @@
-echo YW5nZWxhIDogV2VicGFzczEyMyB8IFRyeWVsbCA6IFdpbkNsaWVudDEyMw== > /var/www/html/public/c4nn07_BRut3f0rc3.txt
